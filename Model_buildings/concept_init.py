@@ -26,24 +26,17 @@ from clarifai.rest import Image as ClImage
 import os
 
 # Path to all the images 
-mainDir = 'ENTER_PATH_TO_THE_FOLDER_WHERE_FOLDERS_CONTAINING_IMAGES_ARE_LOCATED.'
+mainDir = 'PATH_TO_YOUR_DIRECTORY'
 
-empty_folders = []
 concept_list = []
 for files in os.listdir(mainDir):
     if not files.startswith('.'): # This skips any hidden files which usually begin with .xyz 
-        if len(os.listdir(mainDir+'/'+files)) == 0:
-            concept_name = files.rsplit('_',1)
-            empty_folders.append(concept_name[1])
-            print(files , 'is empty\n')
-        else:
-            concept_name = files.rsplit('_',1)
-            concept_list.append(concept_name[1])
-            print(files, 'is good\n')
+            concept_name = files
+            concept_list.append(concept_name)
+            # print(files, 'is good\n')
     else: 
         pass
 
-# print('\nThere are ', len(empty_folders), empty_folders)
 
 print('\nthe concepts are as follows:')
 
@@ -51,6 +44,6 @@ for x in range(len(concept_list)):
     print(concept_list[x])
 
 #Provide the API key you generated for your app in app
-app = ClarifaiApp(api_key = 'YOUR_API_KEY')
-model = app.models.create('Eivan-model', concepts = concept_list)
+app = ClarifaiApp(api_key = 'YOUR-API-KEY')
+model = app.models.create('MODEL-NAME', concepts = concept_list)
 
